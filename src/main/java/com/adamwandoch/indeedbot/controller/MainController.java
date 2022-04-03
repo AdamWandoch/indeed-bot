@@ -16,8 +16,10 @@ public class MainController {
 
     @GetMapping("/")
     public String home() {
-        return "<font size=5>Home Page</font><br>" +
-                "Try using /jobs endpoint...<br>" +
+        return "<font size=5>Home Page</font>" +
+                "<br>Available endpoints:" +
+                "<br> /jobs" +
+                "<br> /job/{id}" +
                 "Total jobs cached on startup: " + cachedJobs.size();
     }
 
