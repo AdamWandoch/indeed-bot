@@ -20,24 +20,22 @@ public class MainController {
 
     @GetMapping("/jobs")
     public String jobs() {
-        //displays all active jobs
+        //attempts to display all active jobs with their details
         String body = "";
-//        cachedJobs.stream()
-//                .filter(job -> job.getTitle().contains("Java"))
-//                .forEach(job -> {
-//                    body.concat("<p>*********************</p>");
-//                    body.concat("<p>Title: " + job.getTitle() + "</p>");
-//                    body.concat("<p>Company: " + job.getCompany() + "</p>");
-//                    body.concat("<p>IndeedID: " + job.getIndeedId() + "</p>");
-//                    body.concat("<p>LINK: " + job.getLink() + "</p>");
-//                    body.concat("<p>*********************</p>");
-//                });
-        body = "cachedJobs.size() = " + cachedJobs.size();
+        cachedJobs.forEach(job -> {
+            body.concat("<p>*********************</p>");
+            body.concat("<p>Title: " + job.getTitle() + "</p>");
+            body.concat("<p>Company: " + job.getCompany() + "</p>");
+            body.concat("<p>IndeedID: " + job.getIndeedId() + "</p>");
+            body.concat("<p>LINK: " + job.getLink() + "</p>");
+            body.concat("<p>*********************</p>");
+        });
         return body;
     }
 
     @GetMapping("/job/{index}")
     public String job(@PathVariable(value = "index") int index) {
+        //displays title and id of a records at specified index
         return cachedJobs.get(index).getTitle();
     }
 }
