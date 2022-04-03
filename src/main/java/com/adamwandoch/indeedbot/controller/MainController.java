@@ -22,15 +22,20 @@ public class MainController {
         //displays all active jobs
         String body = "";
         cachedJobs.stream()
+                .filter(job -> job.getTitle().contains("Java"))
                 .forEach(job -> {
                     body.concat("<p>*********************</p>");
                     body.concat("<p>Title: " + job.getTitle() + "</p>");
                     body.concat("<p>Company: " + job.getCompany() + "</p>");
                     body.concat("<p>IndeedID: " + job.getIndeedId() + "</p>");
-                    body.concat("<p>LINK: <a href=\"" + job.getLink() + "\"/>VISIT</a></p>");
+                    body.concat("<p>LINK: " + job.getLink() + "</p>");
                     body.concat("<p>*********************</p>");
                 });
-
         return body;
+    }
+
+    @GetMapping("/job")
+    public String job() {
+        return cachedJobs.get(2).getLink();
     }
 }
