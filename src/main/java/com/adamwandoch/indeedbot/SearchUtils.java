@@ -39,7 +39,7 @@ public class SearchUtils {
                     line = inputStream.readLine();
                     rawHtmlLines.add(line);
                 }
-                Thread.sleep(20);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 System.out.println("Interrupted exception: " + e.getMessage());
             }
@@ -65,7 +65,7 @@ public class SearchUtils {
                 line = inputStream.readLine();
                 rawHtmlLines.add(line);
             }
-            Thread.sleep(20);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             System.out.println("Interrupted exception: " + e.getMessage());
         }
@@ -104,7 +104,7 @@ public class SearchUtils {
         return "https://ie.indeed.com/viewjob?jk=".concat(jobId);
     }
 
-    public static List<IndeedJob> getAllActiveJobs() {
+    public static List<IndeedJob> updateAllActiveJobs() {
         //returns a list of all IndeedJob objects from given Indeed job id list
         List<IndeedJob> jobList = new ArrayList<>();
         List<String> raw = getRawHtml(INDEED_QUERY_URL);
@@ -141,5 +141,6 @@ public class SearchUtils {
 
         return job;
     }
+
 
 }
