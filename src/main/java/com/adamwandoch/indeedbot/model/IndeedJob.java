@@ -6,7 +6,6 @@ package com.adamwandoch.indeedbot.model;
 
 public class IndeedJob {
 
-    private long id;
     private String indeedId;
     private String link;
     private String title;
@@ -15,7 +14,6 @@ public class IndeedJob {
     @Override
     public String toString() {
         return "IndeedID: " + indeedId +
-                "\n\tID: " + id +
                 "\n\tTitle: " + title +
                 "\n\tCompany: " + company +
                 "\n\tLink: " + link + "\n";
@@ -27,14 +25,6 @@ public class IndeedJob {
 
     public void setCompany(String company) {
         this.company = company;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getIndeedId() {

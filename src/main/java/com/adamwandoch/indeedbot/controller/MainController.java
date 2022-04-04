@@ -18,11 +18,11 @@ public class MainController {
 
     @GetMapping("/")
     public String home() {
-        return "<font size=5>Home Page</font>" +
-                "<br>Available endpoints:" +
+        return "<font size=7>Indeed.ie Java Jobs" +
+                "<br>Testing endpoints:" +
                 "<br> /jobs" +
-                "<br> /job/{id}" +
-                "Total jobs cached on startup: " + cachedJobs.size();
+                "<br> /job/{index}" +
+                "<br>Total jobs cached on startup: " + cachedJobs.size() + "</font>";
     }
 
     @GetMapping("/jobs")
@@ -32,13 +32,6 @@ public class MainController {
 
     @GetMapping("/job/{index}")
     public IndeedJob job(@PathVariable(value = "index") int index) {
-        //displays details of a record at specified index
         return cachedJobs.get(index);
-//        if (index >= cachedJobs.size()) return "Job with a given index doesn't exist";
-//        IndeedJob job = cachedJobs.get(index);
-//        return job.getTitle() +
-//                "<br>" + job.getCompany() +
-//                "<br>" + job.getIndeedId() +
-//                "<br>" + job.getLink();
     }
 }
