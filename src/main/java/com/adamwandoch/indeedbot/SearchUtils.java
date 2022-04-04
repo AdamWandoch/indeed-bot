@@ -39,6 +39,9 @@ public class SearchUtils {
                     line = inputStream.readLine();
                     rawHtmlLines.add(line);
                 }
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                System.out.println("Interrupted exception: " + e.getMessage());
             }
             catch (MalformedURLException e) {
                 System.out.println("URL malformed: " + e.getMessage());
@@ -62,6 +65,9 @@ public class SearchUtils {
                 line = inputStream.readLine();
                 rawHtmlLines.add(line);
             }
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted exception: " + e.getMessage());
         }
         catch (MalformedURLException e) {
             System.out.println("URL malformed: " + e.getMessage());
