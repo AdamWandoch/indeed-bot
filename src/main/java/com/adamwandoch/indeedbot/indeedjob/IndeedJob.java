@@ -1,4 +1,4 @@
-package com.adamwandoch.indeedbot.model;
+package com.adamwandoch.indeedbot.indeedjob;
 
 /**
  * @author Adam Wandoch

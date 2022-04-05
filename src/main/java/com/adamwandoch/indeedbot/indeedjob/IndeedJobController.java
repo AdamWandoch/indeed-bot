@@ -1,7 +1,7 @@
-package com.adamwandoch.indeedbot.controller;
+package com.adamwandoch.indeedbot.indeedjob;
 
 import com.adamwandoch.indeedbot.SearchUtils;
-import com.adamwandoch.indeedbot.model.IndeedJob;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,10 @@ import static com.adamwandoch.indeedbot.IndeedBotApplication.cachedJobs;
  */
 
 @RestController
-public class MainController {
+public class IndeedJobController {
+
+    @Autowired
+    private IndeedJobService indeedJobService;
 
     @GetMapping("/")
     public String home() {
@@ -29,12 +32,12 @@ public class MainController {
 
     @GetMapping("/jobs")
     public List<IndeedJob> getJobs() {
-        return cachedJobs;
+        return indeedJobService.getCachedJobs();
     }
 
     @GetMapping("/job/{index}")
     public IndeedJob job(@PathVariable(value = "index") int index) {
-        return cachedJobs.get(index);
+        return indeedJobService.get(index);
     }
 
     @GetMapping("/update")

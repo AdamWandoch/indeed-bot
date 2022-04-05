@@ -1,6 +1,6 @@
 package com.adamwandoch.indeedbot;
 
-import com.adamwandoch.indeedbot.model.IndeedJob;
+import com.adamwandoch.indeedbot.indeedjob.IndeedJob;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

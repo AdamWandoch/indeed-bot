@@ -1,6 +1,6 @@
 package com.adamwandoch.indeedbot;
 
-import com.adamwandoch.indeedbot.model.IndeedJob;
+import com.adamwandoch.indeedbot.indeedjob.IndeedJob;
 
 import java.io.BufferedReader;
 import java.io.IOException;
