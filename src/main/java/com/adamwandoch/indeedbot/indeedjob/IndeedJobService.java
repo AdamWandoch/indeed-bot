@@ -19,17 +19,16 @@ import java.util.stream.Collectors;
 public class IndeedJobService {
 
     // tag to find job id in html code
-    private final String JOB_ID_LINE_PREFIX = "<a id=\"job_";
+    private final String JOB_ID_LINE_PREFIX = "]= {jk:'";
 
     // tag to find job title in html code
-    private String JOB_TITLE_PREFIX = "<span title=\"";
+    private String JOB_TITLE_PREFIX = ",title:'";
 
     // suffix to dispose closing html tag after job title
     private String JOB_TITLE_SUFFIX = "</span>";
 
     // tag to find company name in html code
-    private final String COMPANY_NAME_PREFIX = "<span class=\"companyName\">";
-    private final String COMPANY_NAME_PREFIX2 = "rel=\"noopener\">";
+    private final String COMPANY_NAME_PREFIX = ",srcname:'";
 
     //suffix to dispose closing html tag after company name
     private final String COMPANY_NAME_SUFFIX = "</span>";
@@ -65,29 +64,29 @@ public class IndeedJobService {
 
                 // populate indeedId and link fields
                 int startIndex = line.indexOf(JOB_ID_LINE_PREFIX);
-                job.setIndeedId(line.substring(startIndex + 11, startIndex + 27));
+                job.setIndeedId(line.substring(startIndex + 8, startIndex + 24));
                 job.setLink(makeLink(job.getIndeedId()));
+
+                // populate company name field
+                while (!line.substring(startIndex).startsWith(COMPANY_NAME_PREFIX)) {
+                    startIndex++;
+                }
+                int endIndex = startIndex + COMPANY_NAME_PREFIX.length();
+                while (!line.substring(endIndex).startsWith("'")) {
+                    endIndex++;
+                }
+                job.setCompany(line.substring(startIndex + COMPANY_NAME_PREFIX.length(), endIndex));
 
                 // populate job title field
                 while (!line.substring(startIndex).startsWith(JOB_TITLE_PREFIX)) {
                     startIndex++;
                 }
-                int endIndex = startIndex + JOB_TITLE_PREFIX.length();
-                while (!line.substring(endIndex).startsWith("\"")) {
+                endIndex = startIndex + JOB_TITLE_PREFIX.length();
+                while (!line.substring(endIndex).startsWith("'")) {
                     endIndex++;
                 }
                 job.setTitle(line.substring(startIndex + JOB_TITLE_PREFIX.length(), endIndex));
 
-                // populate company name field
-                while (!line.substring(startIndex).startsWith(COMPANY_NAME_PREFIX) &&
-                       !line.substring(startIndex).startsWith(COMPANY_NAME_PREFIX2)) {
-                    startIndex++;
-                }
-                endIndex = startIndex + COMPANY_NAME_PREFIX.length();
-                while (!line.substring(endIndex).startsWith("<")) {
-                    endIndex++;
-                }
-                job.setCompany(line.substring(startIndex + COMPANY_NAME_PREFIX.length(), endIndex));
 
                 jobList.add(job);
             }
