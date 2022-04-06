@@ -13,10 +13,10 @@ public class IndeedJob {
 
     @Override
     public String toString() {
-        return "IndeedID: " + indeedId +
-                "\n\tTitle: " + title +
-                "\n\tCompany: " + company +
-                "\n\tLink: " + link + "\n";
+        return "[IndeedID]: " + indeedId +
+                "\n\t[Title]: " + title +
+                "\n\t[Company]: " + company +
+                "\n\t[Link]: " + link + "\n";
     }
 
     public String getCompany() {
