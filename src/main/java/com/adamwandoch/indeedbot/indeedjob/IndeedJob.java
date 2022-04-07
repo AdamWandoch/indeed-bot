@@ -1,4 +1,4 @@
-package com.adamwandoch.indeedbot.model;
+package com.adamwandoch.indeedbot.indeedjob;
 
 /**
  * @author Adam Wandoch
@@ -10,14 +10,6 @@ public class IndeedJob {
     private String link;
     private String title;
     private String company;
-
-    @Override
-    public String toString() {
-        return "IndeedID: " + indeedId +
-                "\n\tTitle: " + title +
-                "\n\tCompany: " + company +
-                "\n\tLink: " + link + "\n";
-    }
 
     public String getCompany() {
         return company;
@@ -49,5 +41,28 @@ public class IndeedJob {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "[IndeedID]: " + indeedId +
+                "\n\t[Title]: " + title +
+                "\n\t[Company]: " + company +
+                "\n\t[Link]: " + link + "\n";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (!(obj instanceof IndeedJob)) return false;
+        IndeedJob jobToCompare = (IndeedJob) obj;
+        return this.indeedId.equals(jobToCompare.indeedId);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.indeedId != null ? this.indeedId.hashCode() : 0);
+        return hash;
     }
 }
