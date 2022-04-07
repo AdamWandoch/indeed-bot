@@ -120,7 +120,7 @@ public class IndeedJobService {
                     while (!pageCount.substring(endIndex).startsWith(" ")) {
                         endIndex++;
                     }
-                    limit = Integer.parseInt(pageCount.substring(startIndex, endIndex));
+                    limit = Integer.parseInt(pageCount.substring(startIndex, endIndex).replaceAll("\\D", ""));
                     System.out.println("[Limit value] : " + limit);
                 }
 
