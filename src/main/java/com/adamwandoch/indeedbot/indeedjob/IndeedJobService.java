@@ -18,6 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class IndeedJobService {
 
+    public IndeedJobService() {
+    }
+
+    public IndeedJobService(String PAGE_COUNT_PREFIX, String JOB_TITLE_PREFIX, List<IndeedJob> cachedJobs) {
+        this.PAGE_COUNT_PREFIX = PAGE_COUNT_PREFIX;
+        this.JOB_TITLE_PREFIX = JOB_TITLE_PREFIX;
+        this.cachedJobs = cachedJobs;
+    }
+
     // prefix for pages count
     private String PAGE_COUNT_PREFIX = "Page 1 of ";
 
