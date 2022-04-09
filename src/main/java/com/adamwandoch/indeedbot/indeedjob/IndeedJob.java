@@ -1,5 +1,7 @@
 package com.adamwandoch.indeedbot.indeedjob;
 
+import java.util.Objects;
+
 /**
  * @author Adam Wandoch
  */
@@ -7,7 +9,7 @@ package com.adamwandoch.indeedbot.indeedjob;
 public class IndeedJob {
 
     private String indeedId;
-    private String link;
+    private String url;
     private String title;
     private String company;
 
@@ -27,12 +29,12 @@ public class IndeedJob {
         this.indeedId = indeedId;
     }
 
-    public String getLink() {
-        return link;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {
@@ -45,24 +47,24 @@ public class IndeedJob {
 
     @Override
     public String toString() {
-        return "[IndeedID]: " + indeedId +
-                "\n\t[Title]: " + title +
-                "\n\t[Company]: " + company +
-                "\n\t[Link]: " + link + "\n";
+        return "IndeedJob{" +
+                "indeedId='" + indeedId + '\'' +
+                ", title='" + title + '\'' +
+                ", company='" + company + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (!(obj instanceof IndeedJob)) return false;
-        IndeedJob jobToCompare = (IndeedJob) obj;
-        return this.indeedId.equals(jobToCompare.indeedId);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IndeedJob indeedJob = (IndeedJob) o;
+        return Objects.equals(indeedId, indeedJob.indeedId) && Objects.equals(url, indeedJob.url) && Objects.equals(title, indeedJob.title) && Objects.equals(company, indeedJob.company);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (this.indeedId != null ? this.indeedId.hashCode() : 0);
-        return hash;
+        return Objects.hash(indeedId, url, title, company);
     }
 }

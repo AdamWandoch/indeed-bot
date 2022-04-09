@@ -68,10 +68,10 @@ public class IndeedJobService {
             if (line.contains(JOB_ID_LINE_PREFIX)) {
                 IndeedJob job = new IndeedJob();
 
-                // populate indeedId and link fields
+                // populate indeedId and url fields
                 int startIndex = line.indexOf(JOB_ID_LINE_PREFIX);
                 job.setIndeedId(line.substring(startIndex + 8, startIndex + 24));
-                job.setLink(makeLink(job.getIndeedId()));
+                job.setUrl(generateJobUrl(job.getIndeedId()));
 
                 // populate company name field
                 while (!line.substring(startIndex).startsWith(COMPANY_NAME_PREFIX)) {
@@ -96,15 +96,13 @@ public class IndeedJobService {
 
                 jobList.add(job);
             }
-
         }
-        System.out.println("[Job list count] : " + jobList.stream().distinct().count());
+
         return jobList.stream().distinct().collect(Collectors.toList());
     }
 
     private List<String> getRawHtml(String webAddress) {
-        // get raw html response from indeed using start parameter for query, it changes the page
-        // going over 15 times in case there was 15 pages
+        // get raw html response from indeed using start parameter for query
         List<String> rawHtmlLines = new ArrayList<>();
         int limit = Integer.MAX_VALUE;
         for (int i = 0; i < limit; i += 10) {
@@ -149,12 +147,11 @@ public class IndeedJobService {
         return rawHtmlLines;
     }
 
-    private String makeLink(String jobId) {
-        //returns a job link for a given jobId
+    private String generateJobUrl(String jobId) {
         return "https://ie.indeed.com/viewjob?jk=".concat(jobId);
     }
 
-    public void update() {
+    public void updateJobs() {
         cachedJobs = getUpdatedJobs();
     }
 
