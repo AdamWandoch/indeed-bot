@@ -1,5 +1,8 @@
 # IndeedBot
 #### Java jobs scanner
+
+[CHECK IT OUT](https://indeed-bot.herokuapp.com)
+
 This is an experimental project to explore Java ecosystem of technologies for web development. 
 This RESTful API retrieves html from https://ie.indeed.com/jobs?q=java&l=cork&sort=date&filter=0&start=
 and parses it creating a list of IndeedJob objects containing information about the job title, 

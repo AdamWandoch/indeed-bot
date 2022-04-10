@@ -51,8 +51,8 @@ public class IndeedJobService {
         return cachedJobs;
     }
 
-    // returns a list of IndeedJob objects by parsing html
     private List<IndeedJob> getUpdatedJobs() {
+        // returns a list of IndeedJob objects by parsing html
         List<IndeedJob> jobList = new ArrayList<>();
         List<String> htmlLines = getRawHtml(INDEED_QUERY_URL).stream()
                 .filter(l -> l != null)
@@ -114,6 +114,7 @@ public class IndeedJobService {
                     line = inputStream.readLine();
                     rawHtmlLines.add(line);
                 }
+                inputStream.close();
 
                 // find out how many result pages
                 if (limit == Integer.MAX_VALUE) {
@@ -130,7 +131,6 @@ public class IndeedJobService {
                     limit = Integer.parseInt(pageCount.substring(startIndex, endIndex).replaceAll("\\D", ""));
                     System.out.println("[Limit value] : " + limit);
                 }
-
                 Thread.sleep(100);
             }
             catch (InterruptedException e) {
