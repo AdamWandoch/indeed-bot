@@ -22,7 +22,7 @@ public class IndeedBotApplication {
         SpringApplication.run(IndeedBotApplication.class, args);
     }
 
-    @Scheduled(fixedDelay = 5000L)
+    @Scheduled(initialDelayString ="PT10S", fixedDelayString = "${ping.delay}")
     void ping() {
         // attempts to keep the free dyno awake on heroku sending a request in a regular time interval
         System.out.println("PINGING...");
@@ -32,7 +32,9 @@ public class IndeedBotApplication {
             String line = "";
             while (line != null) {
                 line = inputStream.readLine();
-                System.out.println("[RESPONSE LINE RECEIVED]: " + line);
+                if (line != null) {
+                    System.out.println("[RESPONSE LINE RECEIVED]: " + line);
+                }
             }
             inputStream.close();
         }
