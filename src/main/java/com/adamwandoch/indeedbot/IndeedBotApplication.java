@@ -1,9 +1,9 @@
 package com.adamwandoch.indeedbot;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -25,6 +25,7 @@ public class IndeedBotApplication {
     @Scheduled(fixedDelay = 5000L)
     void ping() {
         // attempts to keep the free dyno awake on heroku sending a request in a regular time interval
+        System.out.println("PINGING...");
         try {
             URL url = new URL(PING_ENDPOINT_URL);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -45,7 +46,7 @@ public class IndeedBotApplication {
 
 }
 
-@Configurable
+@Configuration
 @EnableScheduling
 @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true)
 class SchedulingConfiguration {
