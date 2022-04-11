@@ -17,16 +17,6 @@ public class IndeedJobController {
     @Autowired
     private IndeedJobService indeedJobService;
 
-    @GetMapping("/")
-    public String home() {
-        return "<font size=5>Indeed.ie Java job listings in Cork" +
-                "<br>Testing endpoints:" +
-                "<br> /jobs (returns a json list of all job resources)" +
-                "<br> /job/{index} (returns a single job resource)" +
-                "<br> /update (scans Indeed.ie again and updates jobs resource cache)" +
-                "<br>Total jobs cached: " + indeedJobService.getCachedJobs().size();
-    }
-
     @GetMapping("/jobs")
     public List<IndeedJob> getJobs() {
         return indeedJobService.getCachedJobs();
