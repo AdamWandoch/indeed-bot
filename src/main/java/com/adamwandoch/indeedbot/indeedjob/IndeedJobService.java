@@ -37,7 +37,7 @@ public class IndeedJobService {
     private String JOB_TITLE_PREFIX = ",title:'";
 
     // tag to find company name in html code
-    private final String COMPANY_NAME_PREFIX = ",srcname:'";
+    private final String COMPANY_NAME_PREFIX = ",cmp:'";
 
     // prefix to find company location, currently not in use (INDEED_QUERY_URL returns only jobs with Cork as location)
     private final String COMPANY_LOCATION_PREFIX = "<div class=\"companyLocation\">";
@@ -153,6 +153,7 @@ public class IndeedJobService {
 
     public void updateJobs() {
         cachedJobs = getUpdatedJobs();
+        System.out.println("[IndeedJobService] : UPDATED JOB LIST");
     }
 
     public IndeedJob getJob(int index) {

@@ -1,5 +1,7 @@
 package com.adamwandoch.indeedbot;
 
+import com.adamwandoch.indeedbot.indeedjob.IndeedJobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,13 +22,16 @@ public class IndeedBotApplication {
 
     public static final String PING_ENDPOINT_URL = "https://indeed-bot.herokuapp.com/ping";
 
+    @Autowired
+    private IndeedJobService indeedJobService;
+
     public static void main(String[] args) {
         SpringApplication.run(IndeedBotApplication.class, args);
     }
 
-    @Scheduled(initialDelayString ="PT10S", fixedDelayString = "${ping.delay}")
+    @Scheduled(initialDelayString ="${ping.delay}", fixedDelayString = "${ping.delay}")
     void ping() {
-        // attempts to keep the free dyno awake on heroku sending a request in a regular time interval
+        // keeps the free dyno awake on Heroku sending a request in a regular time interval
         System.out.println("PINGING...");
         try {
             URL url = new URL(PING_ENDPOINT_URL);
@@ -48,14 +53,17 @@ public class IndeedBotApplication {
         }
     }
 
+    @Scheduled(initialDelayString = "${update.delay}", fixedDelayString = "${update.delay}")
+    void update() {
+        indeedJobService.updateJobs();
+    }
+
 }
 
 @Configuration
 @EnableScheduling
 @ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true)
-class SchedulingConfiguration {
-
-}
+class SchedulingConfiguration {}
 
 @Configuration
 class StaticViewConfig implements WebMvcConfigurer {
