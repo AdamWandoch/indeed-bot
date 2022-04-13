@@ -39,13 +39,10 @@ public class IndeedJobService {
     // tag to find company name in html code
     private final String COMPANY_NAME_PREFIX = ",cmp:'";
 
-    // prefix to find company location, currently not in use (INDEED_QUERY_URL returns only jobs with Cork as location)
-    private final String COMPANY_LOCATION_PREFIX = "<div class=\"companyLocation\">";
+    // query with "software" keyword, Cork location and sorted from newest
+    private final String INDEED_QUERY_URL = "https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=";
 
-    // query with "Java" keyword, Cork location and sorted from newest
-    private final String INDEED_QUERY_URL = "https://ie.indeed.com/jobs?q=java&l=cork&sort=date&filter=0&start=";
-
-    private List<IndeedJob> cachedJobs = getUpdatedJobs();
+    private List<IndeedJob> cachedJobs = new ArrayList<>();
 
     public List<IndeedJob> getCachedJobs() {
         return cachedJobs;
@@ -53,6 +50,7 @@ public class IndeedJobService {
 
     private List<IndeedJob> getUpdatedJobs() {
         // returns a list of IndeedJob objects by parsing html
+        System.out.println("[IndeedJobService] : UPDATING INITIALIZED");
         List<IndeedJob> jobList = new ArrayList<>();
         List<String> htmlLines = getRawHtml(INDEED_QUERY_URL).stream()
                 .filter(l -> l != null)
@@ -129,7 +127,7 @@ public class IndeedJobService {
                         endIndex++;
                     }
                     limit = Integer.parseInt(pageCount.substring(startIndex, endIndex).replaceAll("\\D", ""));
-                    System.out.println("[Limit value] : " + limit);
+                    System.out.println("[IndeedJobService] : TOTAL RECORDS FOUND: " + limit);
                 }
                 Thread.sleep(100);
             }
