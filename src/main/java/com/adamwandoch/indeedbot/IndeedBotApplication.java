@@ -32,7 +32,7 @@ public class IndeedBotApplication {
     @Scheduled(initialDelayString ="${ping.delay}", fixedDelayString = "${ping.delay}")
     void ping() {
         // keeps the free dyno awake on Heroku sending a request in a regular time interval
-        System.out.println("PINGING...");
+        System.out.println("[PINGING INITIALIZED]");
         try {
             URL url = new URL(PING_ENDPOINT_URL);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -40,7 +40,7 @@ public class IndeedBotApplication {
             while (line != null) {
                 line = inputStream.readLine();
                 if (line != null) {
-                    System.out.println("[RESPONSE LINE RECEIVED]: " + line);
+                    System.out.println("[RESPONSE LINE RECEIVED] : " + line);
                 }
             }
             inputStream.close();
@@ -53,7 +53,7 @@ public class IndeedBotApplication {
         }
     }
 
-    @Scheduled(initialDelayString = "${update.delay}", fixedDelayString = "${update.delay}")
+    @Scheduled(initialDelayString = "${initial.update.delay}", fixedDelayString = "${update.delay}")
     void update() {
         indeedJobService.updateJobs();
     }
