@@ -5,7 +5,7 @@
 
 This is an experimental project to explore Java ecosystem of technologies for web development.
 
-The application retrieves html from https://ie.indeed.com/jobs?q=java&l=cork&sort=date&filter=0&start=
+The application retrieves html from https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=
 and parses it creating a list of IndeedJob objects containing information about the job title, 
 company name, unique "indeed job id" and a link to view the listing. At this point in time data is only stored in memory.
 Objects are available in JSON format through endpoints for front-end consumer.
