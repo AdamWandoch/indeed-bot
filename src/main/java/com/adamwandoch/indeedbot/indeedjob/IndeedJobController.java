@@ -27,6 +27,16 @@ public class IndeedJobController {
         return indeedJobService.getJob(index);
     }
 
+    @GetMapping("/jobs/title/{keyword}")
+    public List<IndeedJob> getJobsByTitle(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByTitle(keyword.toLowerCase());
+    }
+
+    @GetMapping("/jobs/company/{keyword}")
+    public List<IndeedJob> getJobsByCompany(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByCompany(keyword.toLowerCase());
+    }
+
     @GetMapping("/update")
     public String update() {
         indeedJobService.updateJobs();
