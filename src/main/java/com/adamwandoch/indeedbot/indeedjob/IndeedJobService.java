@@ -157,4 +157,16 @@ public class IndeedJobService {
     public IndeedJob getJob(int index) {
         return cachedJobs.get(index);
     }
+
+    public List<IndeedJob> getJobsByTitle(String keyword) {
+        return getCachedJobs().stream()
+                .filter(j -> j.getTitle().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getJobsByCompany(String keyword) {
+        return getCachedJobs().stream()
+                .filter(j -> j.getCompany().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
+    }
 }

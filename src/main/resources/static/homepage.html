@@ -13,7 +13,6 @@
     .div1 {
         margin-left: auto;
         margin-right: auto;
-        margin-right: auto;
         margin-top: 5px;
         margin-bottom: 5px;
         border: 1px solid;
@@ -24,7 +23,7 @@
         text-align: center;
         color: #ffffff;
         border-radius: 10px;
-        font-size: 25px;
+        font-size: 16px;
         font-family: Georgia;
         spacing: 10px
     }
@@ -32,7 +31,7 @@
     .div2 {
         margin-left: 5%;
         margin-right: 5%;
-        text-align: left;
+        text-align: justify;
     }
 
     a {
@@ -56,16 +55,17 @@
 </div>
 <div class="div1">
     <div class="div2">
-    <span class="p1">
         <h2>Description</h2>
         <p>This is an experimental project to explore Java ecosystem of technologies for web development.</p>
-        <p>The application retrieves html from <a href="https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=" target="_blank">HERE</a> and parses it creating a list of IndeedJob objects containing information about the job title, company name, unique "indeed job id" and a link to view the listing. At this point in time data is only stored in memory. Objects are available in JSON format through endpoints for front-end consumer.</p>
-        <p>This Spring Boot powered application is running on a free Heroku dyno which could sleep occasionally (give it a few seconds to respond); it has however a scheduled task that hits the custom "/ping" endpoint every 10 minutes to keep itself awake. Another scheduled task scans indeed and updates the job list automatically every so often.</p>
+        <p>The application retrieves html from <a href="https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=" target="_blank">HERE</a> and parses it creating a list of IndeedJob objects containing information about the job title, company name, unique "indeed job id" and a link to view the listing. At this point in time data is stored in memory and updated regularly. Data received from these endpoints is a live representation of Indeed job listings.
+            Objects are available in JSON format through endpoints for front-end consumer.</p>
+        <p>This Spring Boot powered RESTful API is running on a free Heroku dyno which could sleep occasionally (give it a few seconds to respond); it has however a scheduled task that hits the custom "/ping" endpoint every 10 minutes to keep itself awake. Another scheduled task scans indeed and updates the job list automatically in a specified time interval.</p>
         <ul><h3>Available endpoints:</h3>
-            <li>/jobs (returns a json list of all job resources) <a href="http://indeed-bot.herokuapp.com/jobs" target="_blank">GO!</a></li>
+            <li>/jobs (returns a list of all job resources) <a href="http://indeed-bot.herokuapp.com/jobs" target="_blank">GO!</a></li>
             <li>/job/{index} (returns a single job resource) <a href="http://indeed-bot.herokuapp.com/job/0" target="_blank">GO!</a></li>
+            <li>/jobs/title/{keyword} (returns a list of jobs containing the keyword in title) <a href="http://indeed-bot.herokuapp.com/jobs/title/Java" target="_blank">GO!</a></li>
+            <li>/jobs/company/{keyword} (returns a list of jobs containing the keyword in company name) <a href="http://indeed-bot.herokuapp.com/jobs/company/Company" target="_blank">GO!</a></li>
         </ul>
-    </span>
     </div>
 </div>
 <div class="div1">
