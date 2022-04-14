@@ -1,6 +1,8 @@
 package com.adamwandoch.indeedbot;
 
 import com.adamwandoch.indeedbot.indeedjob.IndeedJobService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +24,8 @@ public class IndeedBotApplication {
 
     public static final String PING_ENDPOINT_URL = "https://indeed-bot.herokuapp.com/ping";
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndeedBotApplication.class);
+
     @Autowired
     private IndeedJobService indeedJobService;
 
@@ -32,7 +36,7 @@ public class IndeedBotApplication {
     @Scheduled(initialDelayString ="${ping.delay}", fixedDelayString = "${ping.delay}")
     void ping() {
         // keeps the free dyno awake on Heroku sending a request in a regular time interval
-        System.out.println("[PINGING INITIALIZED]");
+        LOGGER.info("PINGING INITIALIZED");
         try {
             URL url = new URL(PING_ENDPOINT_URL);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -40,7 +44,7 @@ public class IndeedBotApplication {
             while (line != null) {
                 line = inputStream.readLine();
                 if (line != null) {
-                    System.out.println("[RESPONSE LINE RECEIVED] : " + line);
+                    LOGGER.info("RESPONSE LINE RECEIVED : " + line);
                 }
             }
             inputStream.close();
