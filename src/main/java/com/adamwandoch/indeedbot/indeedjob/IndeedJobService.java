@@ -1,5 +1,7 @@
 package com.adamwandoch.indeedbot.indeedjob;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class IndeedJobService {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(IndeedJobService.class);
 
     public IndeedJobService() {
     }
@@ -50,7 +54,7 @@ public class IndeedJobService {
 
     private List<IndeedJob> getUpdatedJobs() {
         // returns a list of IndeedJob objects by parsing html
-        System.out.println("[IndeedJobService] : UPDATING INITIALIZED");
+        LOGGER.info("UPDATING INITIALIZED");
         List<IndeedJob> jobList = new ArrayList<>();
         List<String> htmlLines = getRawHtml(INDEED_QUERY_URL).stream()
                 .filter(l -> l != null)
@@ -118,7 +122,9 @@ public class IndeedJobService {
                 if (limit == Integer.MAX_VALUE) {
                     String pageCount = rawHtmlLines.stream()
                             .filter(l -> l != null)
+                            .peek(l -> LOGGER.info("pre page count filter : " + l))
                             .filter(l -> l.contains(PAGE_COUNT_PREFIX))
+                            .peek((l -> LOGGER.info("post page count filter : " + l)))
                             .collect(Collectors.toList()).get(0);
 
                     int startIndex = pageCount.indexOf(PAGE_COUNT_PREFIX) + PAGE_COUNT_PREFIX.length();
@@ -127,18 +133,21 @@ public class IndeedJobService {
                         endIndex++;
                     }
                     limit = Integer.parseInt(pageCount.substring(startIndex, endIndex).replaceAll("\\D", ""));
-                    System.out.println("[IndeedJobService] : TOTAL RECORDS FOUND: " + limit);
+                    LOGGER.info("TOTAL RECORDS FOUND : " + limit);
                 }
                 Thread.sleep(100);
             }
             catch (InterruptedException e) {
-                System.out.println("Interrupted exception: " + e.getMessage());
+                LOGGER.error("Interrupted exception : " + e.getMessage());
+                e.printStackTrace();
             }
             catch (MalformedURLException e) {
-                System.out.println("URL malformed: " + e.getMessage());
+                LOGGER.error("URL malformed : " + e.getMessage());
+                e.printStackTrace();
             }
             catch (IOException e) {
-                System.out.println("IOException: " + e.getMessage());
+                LOGGER.error("IOException : " + e.getMessage());
+                e.printStackTrace();
             }
         }
 
@@ -151,7 +160,11 @@ public class IndeedJobService {
 
     public void updateJobs() {
         cachedJobs = getUpdatedJobs();
-        System.out.println("[IndeedJobService] : UPDATED JOB LIST");
+        if (cachedJobs.size() > 0) {
+            LOGGER.info("UPDATED JOB LIST WITH " + cachedJobs.size() + " RECORDS");
+        } else {
+            LOGGER.info("JOB LIST SIZE == 0, UPDATE UNSUCCESSFUL");
+        }
     }
 
     public IndeedJob getJob(int index) {
