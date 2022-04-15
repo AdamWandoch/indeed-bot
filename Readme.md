@@ -1,8 +1,6 @@
 # IndeedBot API
 ###### Jobs scanner
 
-![maven](https://github.com/AdamWandoch/indeed-bot/actions/workflows/maven.yml/badge.svg)
-
 [VIEW DEPLOYMENT](https://indeed-bot.herokuapp.com)
 
 This is an experimental project to explore Java ecosystem of technologies for web development.
