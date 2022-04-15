@@ -1,17 +1,30 @@
 package com.adamwandoch.indeedbot.indeedjob;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
  * @author Adam Wandoch
  */
 
+@Entity
 public class IndeedJob {
 
+    @Id
     private String indeedId;
     private String url;
     private String title;
     private String company;
+
+    public IndeedJob() {}
+
+    public IndeedJob(String indeedId, String url, String title, String company) {
+        this.indeedId = indeedId;
+        this.url = url;
+        this.title = title;
+        this.company = company;
+    }
 
     public String getCompany() {
         return company;

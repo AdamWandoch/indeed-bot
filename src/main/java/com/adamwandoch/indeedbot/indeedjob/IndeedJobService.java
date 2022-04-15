@@ -2,6 +2,7 @@ package com.adamwandoch.indeedbot.indeedjob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,7 +21,10 @@ import java.util.stream.Collectors;
 @Service
 public class IndeedJobService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(IndeedJobService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndeedJobService.class);
+
+    @Autowired
+    private IndeedJobRepository indeedJobRepository;
 
     public IndeedJobService() {
     }
@@ -158,12 +162,18 @@ public class IndeedJobService {
         return "https://ie.indeed.com/viewjob?jk=".concat(jobId);
     }
 
-    public void updateJobs() {
-        cachedJobs = getUpdatedJobs();
+    public void cacheAndStoreJobs() {
+        indeedJobRepository.findAll().forEach(cachedJobs::add);
+        List<IndeedJob> updatedJobs = getUpdatedJobs();
+        updatedJobs.forEach(job -> {
+            if (!cachedJobs.contains(job)) cachedJobs.add(job);
+        });
+
         if (cachedJobs.size() > 0) {
-            LOGGER.info("UPDATED JOB LIST WITH " + cachedJobs.size() + " RECORDS");
+            LOGGER.info("CACHED JOB LIST WITH " + cachedJobs.size() + " RECORDS");
+            indeedJobRepository.saveAll(cachedJobs);
         } else {
-            LOGGER.info("JOB LIST SIZE == 0, UPDATE UNSUCCESSFUL");
+            LOGGER.info("JOB LIST SIZE == 0, CACHING UNSUCCESSFUL");
         }
     }
 

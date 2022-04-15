@@ -39,7 +39,12 @@ public class IndeedJobController {
 
     @GetMapping("/update")
     public String update() {
-        indeedJobService.updateJobs();
+        indeedJobService.cacheAndStoreJobs();
         return "<font size=5>Updated job list size: " + indeedJobService.getCachedJobs().size();
+    }
+
+    @GetMapping("/size")
+    public String size() {
+        return "Cached jobs count : " + indeedJobService.getCachedJobs().size();
     }
 }
