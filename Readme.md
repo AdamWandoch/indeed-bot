@@ -1,5 +1,5 @@
-# IndeedBot
-#### Jobs scanner
+# IndeedBot API
+###### Jobs scanner
 
 [VIEW DEPLOYMENT](https://indeed-bot.herokuapp.com)
 
@@ -10,7 +10,21 @@ and parses it creating a list of IndeedJob objects containing information about 
 company name, unique "indeed job id" and a link to view the listing. All data is persisted to Postgres Database running on Heroku and retrieved on application restart. 
 Data is exposed through a number of basic endpoints in JSON format.
 
-This Spring Boot powered RESTful API is running on a free Heroku dyno which could sleep occasionally, it has however a scheduled task that hits the custom "/ping" endpoint in a specified time interval to keep itself awake. Another scheduled task scans Indeed.ie and updates the job list periodically.
+This Spring Boot powered RESTful API is running on a free Heroku dyno which could sleep occasionally, it has however a scheduled task that hits the custom "/ping" endpoint in a specified time interval to keep itself awake. Another scheduled task scans Indeed.ie and updates the job list periodically.<br>
+
+#### To run the project locally:
+ * install PostgreSQL
+ * create a local postgres database (I'm using pgAdmin for local postgres administration)
+ * install Java 11 or higher
+ * git clone this repository
+ * add system environment variables:
+    * POSTGRES_USERNAME set value to your local postgres username
+    * POSTGRES_PASSWORD set value to your local postgres password
+    * SPRING_PROFILE set value to dev
+ * rename application-dev-sample.properties to application-dev.properties
+ * update application-dev.properties spring.datasource.url property with your database name (I used indeed-db)
+ * install Maven or use your favourite IDE that has Maven support (I recommend IntelliJ IDEA)
+ * build, run and let me know what can we improve :)
 #### Available endpoints serving JSON:
 [/job/{index}](http://indeed-bot.herokuapp.com/job/0) - retrieves a single job object <br>
 [/jobs](http://indeed-bot.herokuapp.com/jobs) - retrieves a list of all job objects <br>
