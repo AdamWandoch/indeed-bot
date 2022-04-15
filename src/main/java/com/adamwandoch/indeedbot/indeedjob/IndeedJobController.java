@@ -21,10 +21,25 @@ public class IndeedJobController {
     public List<IndeedJob> getJobs() {
         return indeedJobService.getCachedJobs();
     }
+    
+    @GetMapping("/jobs/sort/id")
+    public List<IndeedJob> getJobsSortId() {
+        return indeedJobService.getCachedJobsSortId();
+    }
+
+    @GetMapping("/jobs/sort/title")
+    public List<IndeedJob> getJobsSortTitle() {
+        return indeedJobService.getCachedJobsSortTitle();
+    }
+
+    @GetMapping("/jobs/sort/company")
+    public List<IndeedJob> getJobsSortCompany() {
+        return indeedJobService.getCachedJobsSortCompany();
+    }
 
     @GetMapping("/job/{index}")
     public IndeedJob job(@PathVariable(value = "index") int index) {
-        return indeedJobService.getJob(index);
+        return indeedJobService.getJobByIndex(index);
     }
 
     @GetMapping("/jobs/title/{keyword}")
@@ -32,9 +47,39 @@ public class IndeedJobController {
         return indeedJobService.getJobsByTitle(keyword.toLowerCase());
     }
 
+    @GetMapping("/jobs/title/{keyword}/sort/id")
+    public List<IndeedJob> getJobsByTitleSortId(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByTitleSortId(keyword.toLowerCase());
+    }
+
+    @GetMapping("/jobs/title/{keyword}/sort/title")
+    public List<IndeedJob> getJobsByTitleSortTitle(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByTitleSortTitle(keyword.toLowerCase());
+    }
+
+    @GetMapping("/jobs/title/{keyword}/sort/company")
+    public List<IndeedJob> getJobsByTitleSortCompany(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByTitleSortCompany(keyword.toLowerCase());
+    }
+
     @GetMapping("/jobs/company/{keyword}")
     public List<IndeedJob> getJobsByCompany(@PathVariable(value = "keyword") String keyword) {
         return indeedJobService.getJobsByCompany(keyword.toLowerCase());
+    }
+
+    @GetMapping("/jobs/company/{keyword}/sort/id")
+    public List<IndeedJob> getJobsByCompanySortId(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByCompanySortID(keyword.toLowerCase());
+    }
+
+    @GetMapping("/jobs/company/{keyword}/sort/title")
+    public List<IndeedJob> getJobsByCompanySortTitle(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByCompanySortTitle(keyword.toLowerCase());
+    }
+
+    @GetMapping("/jobs/company/{keyword}/sort/company")
+    public List<IndeedJob> getJobsByCompanySortCompany(@PathVariable(value = "keyword") String keyword) {
+        return indeedJobService.getJobsByCompanySortCompany(keyword.toLowerCase());
     }
 
     @GetMapping("/update")

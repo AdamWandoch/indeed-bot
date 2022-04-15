@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,10 +50,6 @@ public class IndeedJobService {
     private final String INDEED_QUERY_URL = "https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=";
 
     private List<IndeedJob> cachedJobs = new ArrayList<>();
-
-    public List<IndeedJob> getCachedJobs() {
-        return cachedJobs;
-    }
 
     private List<IndeedJob> getUpdatedJobs() {
         // returns a list of IndeedJob objects by parsing html retrieved from Indeed.ie
@@ -178,8 +175,30 @@ public class IndeedJobService {
         }
     }
 
-    public IndeedJob getJob(int index) {
+    public IndeedJob getJobByIndex(int index) {
         return cachedJobs.get(index);
+    }
+
+    public List<IndeedJob> getCachedJobs() {
+        return cachedJobs;
+    }
+
+    public List<IndeedJob> getCachedJobsSortId() {
+        return cachedJobs.stream()
+                .sorted(Comparator.comparing(IndeedJob::getIndeedId))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getCachedJobsSortTitle() {
+        return cachedJobs.stream()
+                .sorted(Comparator.comparing(IndeedJob::getTitle))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getCachedJobsSortCompany() {
+        return cachedJobs.stream()
+                .sorted(Comparator.comparing(IndeedJob::getCompany))
+                .collect(Collectors.toList());
     }
 
     public List<IndeedJob> getJobsByTitle(String keyword) {
@@ -188,9 +207,45 @@ public class IndeedJobService {
                 .collect(Collectors.toList());
     }
 
+    public List<IndeedJob> getJobsByTitleSortId(String keyword) {
+        return getJobsByTitle(keyword).stream()
+                .sorted(Comparator.comparing(IndeedJob::getIndeedId))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getJobsByTitleSortTitle(String keyword) {
+        return getJobsByTitle(keyword).stream()
+                .sorted(Comparator.comparing(IndeedJob::getTitle))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getJobsByTitleSortCompany(String keyword) {
+        return getJobsByTitle(keyword).stream()
+                .sorted(Comparator.comparing(IndeedJob::getCompany))
+                .collect(Collectors.toList());
+    }
+
     public List<IndeedJob> getJobsByCompany(String keyword) {
         return getCachedJobs().stream()
                 .filter(j -> j.getCompany().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getJobsByCompanySortID(String keyword) {
+        return getJobsByCompany(keyword).stream()
+                .sorted(Comparator.comparing(IndeedJob::getIndeedId))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getJobsByCompanySortTitle(String keyword) {
+        return getJobsByCompany(keyword).stream()
+                .sorted(Comparator.comparing(IndeedJob::getTitle))
+                .collect(Collectors.toList());
+    }
+
+    public List<IndeedJob> getJobsByCompanySortCompany(String keyword) {
+        return getJobsByCompany(keyword).stream()
+                .sorted(Comparator.comparing(IndeedJob::getCompany))
                 .collect(Collectors.toList());
     }
 }
