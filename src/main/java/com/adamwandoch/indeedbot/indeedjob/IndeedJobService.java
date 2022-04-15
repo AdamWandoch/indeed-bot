@@ -164,10 +164,10 @@ public class IndeedJobService {
 
     public void cacheAndStoreJobs() {
         indeedJobRepository.findAll().forEach(cachedJobs::add);
-        List<IndeedJob> updatedJobs = getUpdatedJobs();
-        updatedJobs.forEach(job -> {
-            if (!cachedJobs.contains(job)) cachedJobs.add(job);
-        });
+//        List<IndeedJob> updatedJobs = getUpdatedJobs();
+//        updatedJobs.forEach(job -> {
+//            if (!cachedJobs.contains(job)) cachedJobs.add(job);
+//        });
 
         if (cachedJobs.size() > 0) {
             LOGGER.info("CACHED JOB LIST WITH " + cachedJobs.size() + " RECORDS");
