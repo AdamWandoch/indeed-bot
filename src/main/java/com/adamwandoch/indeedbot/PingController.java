@@ -12,6 +12,6 @@ public class PingController {
 
     @GetMapping("/ping")
     public String ping() {
-        return "[PING SUCCESSFUL]";
+        return "PING SUCCESSFUL";
     }
 }

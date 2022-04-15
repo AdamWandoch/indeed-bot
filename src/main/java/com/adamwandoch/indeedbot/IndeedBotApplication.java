@@ -59,7 +59,7 @@ public class IndeedBotApplication {
 
     @Scheduled(initialDelayString = "${initial.update.delay}", fixedDelayString = "${update.delay}")
     void update() {
-        indeedJobService.updateJobs();
+        indeedJobService.cacheAndStoreJobs();
     }
 
 }
