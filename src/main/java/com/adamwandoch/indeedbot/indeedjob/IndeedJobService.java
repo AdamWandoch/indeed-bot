@@ -29,22 +29,20 @@ public class IndeedJobService {
     public IndeedJobService() {
     }
 
-    public IndeedJobService(String PAGE_COUNT_PREFIX, String JOB_TITLE_PREFIX, List<IndeedJob> cachedJobs) {
-        this.PAGE_COUNT_PREFIX = PAGE_COUNT_PREFIX;
-        this.JOB_TITLE_PREFIX = JOB_TITLE_PREFIX;
+    public IndeedJobService(List<IndeedJob> cachedJobs) {
         this.cachedJobs = cachedJobs;
     }
 
     // prefix for pages count
-    private String PAGE_COUNT_PREFIX = "Page 1 of ";
+    private final String PAGE_COUNT_PREFIX = "Page 1 of ";
 
-    // tag to find job id in html code
+    // prefix to find job id in html code
     private final String JOB_ID_LINE_PREFIX = "]= {jk:'";
 
-    // tag to find job title in html code
-    private String JOB_TITLE_PREFIX = ",title:'";
+    // prefix to find job title in html code
+    private final String JOB_TITLE_PREFIX = ",title:'";
 
-    // tag to find company name in html code
+    // prefix to find company name in html code
     private final String COMPANY_NAME_PREFIX = ",cmp:'";
 
     // query with "software" keyword, Cork location and sorted from newest
@@ -57,7 +55,7 @@ public class IndeedJobService {
     }
 
     private List<IndeedJob> getUpdatedJobs() {
-        // returns a list of IndeedJob objects by parsing html
+        // returns a list of IndeedJob objects by parsing html retrieved from Indeed.ie
         LOGGER.info("UPDATING INITIALIZED");
         List<IndeedJob> jobList = new ArrayList<>();
         List<String> htmlLines = getRawHtml(INDEED_QUERY_URL).stream()
@@ -98,7 +96,6 @@ public class IndeedJobService {
                     endIndex++;
                 }
                 job.setTitle(line.substring(startIndex + JOB_TITLE_PREFIX.length(), endIndex));
-
 
                 jobList.add(job);
             }
@@ -163,7 +160,11 @@ public class IndeedJobService {
     }
 
     public void cacheAndStoreJobs() {
-        indeedJobRepository.findAll().forEach(cachedJobs::add);
+        // runs a cycle of restoring jobs cache from database and updating cache
+        // and database with records retrieved from Indeed.ie if there are new ones
+        indeedJobRepository.findAll().forEach(job -> {
+            if (!cachedJobs.contains(job)) cachedJobs.add(job);
+        });
         List<IndeedJob> updatedJobs = getUpdatedJobs();
         updatedJobs.forEach(job -> {
             if (!cachedJobs.contains(job)) cachedJobs.add(job);

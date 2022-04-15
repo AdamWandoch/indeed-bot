@@ -40,25 +40,30 @@ public class IndeedBotApplication {
         try {
             URL url = new URL(PING_ENDPOINT_URL);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
-            String line = "";
-            while (line != null) {
-                line = inputStream.readLine();
-                if (line != null) {
-                    LOGGER.info("RESPONSE LINE RECEIVED : " + line);
+            String message = "";
+            while (message != null) {
+                message = inputStream.readLine();
+                if (message != null) {
+                    LOGGER.info("RESPONSE RECEIVED : " + message);
+                } else {
+                    LOGGER.warn("NULL RECEIVED, PING FAILED");
                 }
             }
             inputStream.close();
         }
         catch (MalformedURLException e) {
+            LOGGER.error("MALFORMED URL EXCEPTION : " + e.getMessage());
             e.printStackTrace();
         }
         catch (IOException e) {
+            LOGGER.error("IOEXCEPTION EXCEPTION : " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @Scheduled(initialDelayString = "${initial.update.delay}", fixedDelayString = "${update.delay}")
-    void update() {
+    void refreshJobsData() {
+        // initializes main function: load cache from database, retrieve new list from Indeed.ie, update database
         indeedJobService.cacheAndStoreJobs();
     }
 
