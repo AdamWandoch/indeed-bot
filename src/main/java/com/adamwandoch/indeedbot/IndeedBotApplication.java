@@ -45,8 +45,6 @@ public class IndeedBotApplication {
                 message = inputStream.readLine();
                 if (message != null) {
                     LOGGER.info("RESPONSE RECEIVED : " + message);
-                } else {
-                    LOGGER.warn("NULL RECEIVED, PING FAILED");
                 }
             }
             inputStream.close();
