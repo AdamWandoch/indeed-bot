@@ -1,5 +1,6 @@
 application-dev.properties
 application-heroku.properties
+application-aws.properties
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
