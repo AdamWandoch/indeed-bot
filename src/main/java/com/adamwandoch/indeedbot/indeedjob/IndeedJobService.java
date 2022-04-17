@@ -120,9 +120,8 @@ public class IndeedJobService {
                 if (limit == Integer.MAX_VALUE) {
                     String pageCount = rawHtmlLines.stream()
                             .filter(l -> l != null)
-                            .peek(l -> LOGGER.info("pre page count filter : " + l))
+                            .peek(l -> LOGGER.info("HTML PEEK : " + l))
                             .filter(l -> l.contains(PAGE_COUNT_PREFIX))
-                            .peek((l -> LOGGER.info("post page count filter : " + l)))
                             .collect(Collectors.toList()).get(0);
 
                     int startIndex = pageCount.indexOf(PAGE_COUNT_PREFIX) + PAGE_COUNT_PREFIX.length();
