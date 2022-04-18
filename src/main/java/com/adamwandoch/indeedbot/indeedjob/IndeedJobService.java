@@ -10,9 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -246,5 +244,9 @@ public class IndeedJobService {
         return getJobsByCompany(keyword).stream()
                 .sorted(Comparator.comparing(IndeedJob::getCompany))
                 .collect(Collectors.toList());
+    }
+
+    public long getDBTableSize() {
+        return indeedJobRepository.count();
     }
 }
