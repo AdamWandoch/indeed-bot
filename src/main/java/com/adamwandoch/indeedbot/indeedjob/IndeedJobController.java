@@ -90,6 +90,6 @@ public class IndeedJobController {
 
     @GetMapping("/size")
     public String size() {
-        return "Cached jobs count : " + indeedJobService.getDBTableSize();
+        return "Database jobs count : " + indeedJobService.getDBTableSize();
     }
 }
