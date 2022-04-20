@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 /**
  * @author Adam Wandoch
  */
@@ -18,68 +16,68 @@ public class IndeedJobController {
     private IndeedJobService indeedJobService;
 
     @GetMapping("/jobs")
-    public List<IndeedJob> getJobs() {
-        return indeedJobService.getCachedJobs();
+    public IndeedJobsWrapper getJobs() {
+        return new IndeedJobsWrapper(indeedJobService.getCachedJobs());
     }
     
     @GetMapping("/jobs/sort/id")
-    public List<IndeedJob> getJobsSortId() {
-        return indeedJobService.getCachedJobsSortId();
+    public IndeedJobsWrapper getJobsSortId() {
+        return new IndeedJobsWrapper(indeedJobService.getCachedJobsSortId());
     }
 
     @GetMapping("/jobs/sort/title")
-    public List<IndeedJob> getJobsSortTitle() {
-        return indeedJobService.getCachedJobsSortTitle();
+    public IndeedJobsWrapper getJobsSortTitle() {
+        return new IndeedJobsWrapper(indeedJobService.getCachedJobsSortTitle());
     }
 
     @GetMapping("/jobs/sort/company")
-    public List<IndeedJob> getJobsSortCompany() {
-        return indeedJobService.getCachedJobsSortCompany();
+    public IndeedJobsWrapper getJobsSortCompany() {
+        return new IndeedJobsWrapper(indeedJobService.getCachedJobsSortCompany());
     }
 
     @GetMapping("/job/{index}")
-    public IndeedJob job(@PathVariable(value = "index") int index) {
-        return indeedJobService.getJobByIndex(index);
+    public IndeedJobsWrapper job(@PathVariable(value = "index") int index) {
+        return new IndeedJobsWrapper(indeedJobService.getJobByIndex(index));
     }
 
     @GetMapping("/jobs/title/{keyword}")
-    public List<IndeedJob> getJobsByTitle(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByTitle(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByTitle(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByTitle(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/title/{keyword}/sort/id")
-    public List<IndeedJob> getJobsByTitleSortId(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByTitleSortId(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByTitleSortId(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByTitleSortId(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/title/{keyword}/sort/title")
-    public List<IndeedJob> getJobsByTitleSortTitle(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByTitleSortTitle(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByTitleSortTitle(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByTitleSortTitle(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/title/{keyword}/sort/company")
-    public List<IndeedJob> getJobsByTitleSortCompany(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByTitleSortCompany(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByTitleSortCompany(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByTitleSortCompany(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/company/{keyword}")
-    public List<IndeedJob> getJobsByCompany(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByCompany(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByCompany(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByCompany(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/company/{keyword}/sort/id")
-    public List<IndeedJob> getJobsByCompanySortId(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByCompanySortID(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByCompanySortId(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByCompanySortID(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/company/{keyword}/sort/title")
-    public List<IndeedJob> getJobsByCompanySortTitle(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByCompanySortTitle(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByCompanySortTitle(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByCompanySortTitle(keyword.toLowerCase()));
     }
 
     @GetMapping("/jobs/company/{keyword}/sort/company")
-    public List<IndeedJob> getJobsByCompanySortCompany(@PathVariable(value = "keyword") String keyword) {
-        return indeedJobService.getJobsByCompanySortCompany(keyword.toLowerCase());
+    public IndeedJobsWrapper getJobsByCompanySortCompany(@PathVariable(value = "keyword") String keyword) {
+        return new IndeedJobsWrapper(indeedJobService.getJobsByCompanySortCompany(keyword.toLowerCase()));
     }
 
     @GetMapping("/update")
@@ -90,6 +88,6 @@ public class IndeedJobController {
 
     @GetMapping("/size")
     public String size() {
-        return "Cached jobs count : " + indeedJobService.getDBTableSize();
+        return "Database jobs count : " + indeedJobService.getDBTableSize();
     }
 }

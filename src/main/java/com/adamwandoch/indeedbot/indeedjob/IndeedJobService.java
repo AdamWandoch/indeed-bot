@@ -172,8 +172,8 @@ public class IndeedJobService {
         }
     }
 
-    public IndeedJob getJobByIndex(int index) {
-        return cachedJobs.get(index);
+    public List<IndeedJob> getJobByIndex(int index) {
+        return List.of(cachedJobs.get(index));
     }
 
     public List<IndeedJob> getCachedJobs() {
