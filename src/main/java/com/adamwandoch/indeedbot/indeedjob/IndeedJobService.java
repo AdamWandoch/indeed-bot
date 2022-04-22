@@ -20,16 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class IndeedJobService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(IndeedJobService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(IndeedJobService.class);
 
     @Autowired
     private IndeedJobRepository indeedJobRepository;
 
     public IndeedJobService() {
-    }
-
-    public IndeedJobService(List<IndeedJob> cachedJobs) {
-        this.cachedJobs = cachedJobs;
     }
 
     // prefix for pages count
@@ -47,11 +43,8 @@ public class IndeedJobService {
     // query with "software" keyword, Cork location and sorted from newest
     private final String INDEED_QUERY_URL = "https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=";
 
-    private List<IndeedJob> cachedJobs = new ArrayList<>();
-
     private List<IndeedJob> getUpdatedJobs() {
         // returns a list of IndeedJob objects by parsing html retrieved from Indeed.ie
-        LOGGER.info("UPDATING INITIALIZED");
         List<IndeedJob> jobList = new ArrayList<>();
         List<String> htmlLines = getRawHtml(INDEED_QUERY_URL).stream()
                 .filter(l -> l != null)
@@ -118,7 +111,7 @@ public class IndeedJobService {
                 if (limit == Integer.MAX_VALUE) {
                     String pageCount = rawHtmlLines.stream()
                             .filter(l -> l != null)
-                            .peek(l -> LOGGER.info("HTML PEEK : " + l))
+                            .peek(l -> LOG.info("HTML PEEK : " + l))
                             .filter(l -> l.contains(PAGE_COUNT_PREFIX))
                             .collect(Collectors.toList()).get(0);
 
@@ -128,20 +121,20 @@ public class IndeedJobService {
                         endIndex++;
                     }
                     limit = Integer.parseInt(pageCount.substring(startIndex, endIndex).replaceAll("\\D", ""));
-                    LOGGER.info("TOTAL RECORDS FOUND : " + limit);
+                    LOG.info("TOTAL RECORDS FOUND : " + limit);
                 }
                 Thread.sleep(100);
             }
             catch (InterruptedException e) {
-                LOGGER.error("Interrupted exception : " + e.getMessage());
+                LOG.error("Interrupted exception : " + e.getMessage());
                 e.printStackTrace();
             }
             catch (MalformedURLException e) {
-                LOGGER.error("URL malformed : " + e.getMessage());
+                LOG.error("URL malformed : " + e.getMessage());
                 e.printStackTrace();
             }
             catch (IOException e) {
-                LOGGER.error("IOException : " + e.getMessage());
+                LOG.error("IOException : " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -153,100 +146,21 @@ public class IndeedJobService {
         return "https://ie.indeed.com/viewjob?jk=".concat(jobId);
     }
 
-    public void cacheAndStoreJobs() {
-        // runs a cycle of restoring jobs cache from database and updating cache
-        // and database with records retrieved from Indeed.ie if there are new ones
-        indeedJobRepository.findAll().forEach(job -> {
-            if (!cachedJobs.contains(job)) cachedJobs.add(job);
-        });
+    public void scanIndeed() {
+        // scans indeed and saves retrieved results to database
         List<IndeedJob> updatedJobs = getUpdatedJobs();
-        updatedJobs.forEach(job -> {
-            if (!cachedJobs.contains(job)) cachedJobs.add(job);
-        });
-
-        if (cachedJobs.size() > 0) {
-            LOGGER.info("CACHED JOB LIST WITH " + cachedJobs.size() + " RECORDS");
-            indeedJobRepository.saveAll(cachedJobs);
+        if (updatedJobs.size() > 0) {
+            LOG.info("CACHED JOB LIST WITH " + updatedJobs.size() + " RECORDS");
+            indeedJobRepository.saveAll(updatedJobs);
+            // notify the serving api to update its cache
+            notifyAPI();
         } else {
-            LOGGER.info("JOB LIST SIZE == 0, CACHING UNSUCCESSFUL");
+            LOG.info("JOB LIST SIZE == 0, SCANNING UNSUCCESSFUL");
         }
     }
 
-    public List<IndeedJob> getJobByIndex(int index) {
-        return List.of(cachedJobs.get(index));
-    }
-
-    public List<IndeedJob> getCachedJobs() {
-        return cachedJobs;
-    }
-
-    public List<IndeedJob> getCachedJobsSortId() {
-        return cachedJobs.stream()
-                .sorted(Comparator.comparing(IndeedJob::getIndeedId))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getCachedJobsSortTitle() {
-        return cachedJobs.stream()
-                .sorted(Comparator.comparing(IndeedJob::getTitle))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getCachedJobsSortCompany() {
-        return cachedJobs.stream()
-                .sorted(Comparator.comparing(IndeedJob::getCompany))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByTitle(String keyword) {
-        return getCachedJobs().stream()
-                .filter(j -> j.getTitle().toLowerCase().contains(keyword))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByTitleSortId(String keyword) {
-        return getJobsByTitle(keyword).stream()
-                .sorted(Comparator.comparing(IndeedJob::getIndeedId))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByTitleSortTitle(String keyword) {
-        return getJobsByTitle(keyword).stream()
-                .sorted(Comparator.comparing(IndeedJob::getTitle))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByTitleSortCompany(String keyword) {
-        return getJobsByTitle(keyword).stream()
-                .sorted(Comparator.comparing(IndeedJob::getCompany))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByCompany(String keyword) {
-        return getCachedJobs().stream()
-                .filter(j -> j.getCompany().toLowerCase().contains(keyword))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByCompanySortID(String keyword) {
-        return getJobsByCompany(keyword).stream()
-                .sorted(Comparator.comparing(IndeedJob::getIndeedId))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByCompanySortTitle(String keyword) {
-        return getJobsByCompany(keyword).stream()
-                .sorted(Comparator.comparing(IndeedJob::getTitle))
-                .collect(Collectors.toList());
-    }
-
-    public List<IndeedJob> getJobsByCompanySortCompany(String keyword) {
-        return getJobsByCompany(keyword).stream()
-                .sorted(Comparator.comparing(IndeedJob::getCompany))
-                .collect(Collectors.toList());
-    }
-
-    public long getDBTableSize() {
-        return indeedJobRepository.count();
+    private void notifyAPI() {
+        // call indeed-bot-api.herokuapp.com/reload
+        // FIXME: 22/04/2022
     }
 }
