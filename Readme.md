@@ -9,7 +9,7 @@ VIEW DEPLOYMENT : [HEROKU](https://indeed-bot.herokuapp.com) < | >
 
 This is an experimental project to explore Java ecosystem of technologies for web development.
 
-The application retrieves html from [HERE](ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=) and parses it creating a list of IndeedJob objects containing information about the job title,
+The application retrieves html from [HERE](https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=) and parses it creating a list of IndeedJob objects containing information about the job title,
             company name, unique "indeed job id" and a link to view the listing. 
 
 All data is persisted to Postgres Database hosted on AWS RDS and is available in JSON format through [indeed-bot-api](https://github.com/AdamWandoch/indeed-bot-api)
