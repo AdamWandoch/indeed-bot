@@ -1,4 +1,4 @@
-# IndeedBot API
+# IndeedBot API 
 ###### Jobs scanner
 
 [![BUILD](https://github.com/AdamWandoch/indeed-bot/workflows/BUILD/badge.svg)](https://github.com/AdamWandoch/indeed-bot/actions/workflows/maven.yml)
