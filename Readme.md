@@ -3,6 +3,7 @@
 
 [![BUILD](https://github.com/AdamWandoch/indeed-bot/workflows/BUILD/badge.svg)](https://github.com/AdamWandoch/indeed-bot/actions/workflows/maven.yml)
 
+/// THIS SECTION NEEDS UPDATE WHEN NEW INSTANCE GROUP IS DEPLOYED
 VIEW DEPLOYMENT : [HEROKU](https://indeed-bot.herokuapp.com) < | >
 [AWS](https://ru4umr3xja.eu-west-1.awsapprunner.com)
 
@@ -27,18 +28,5 @@ All data is persisted to Postgres Database hosted on AWS RDS and is available in
  * update application-dev.properties spring.datasource.url property with your database name (I used indeed-db)
  * install Maven or use your favourite IDE that has Maven support (I recommend IntelliJ IDEA)
  * build, run and let me know what can we improve :)
-#### Available endpoints serving JSON:
-[/job/{index}](http://indeed-bot.herokuapp.com/job/0) - retrieves a single job object <br>
-[/jobs](http://indeed-bot.herokuapp.com/jobs) - retrieves a list of all job objects <br>
-[/jobs/sort/id](http://indeed-bot.herokuapp.com/jobs/sort/id) - retrieves a list of all job objects sorted by ID <br>
-[/jobs/sort/title](http://indeed-bot.herokuapp.com/jobs/sort/title) - retrieves a list of all job objects in sorted by title <br>
-[/jobs/sort/company](http://indeed-bot.herokuapp.com/jobs/sort/company) - retrieves a list of all job objects in sorted by company <br>
-[/jobs/title/{keyword}](http://indeed-bot.herokuapp.com/jobs/title/software) - retrieves a list of jobs containing keyword in title <br>
-[/jobs/title/{keyword}/sort/id](http://indeed-bot.herokuapp.com/jobs/title/software/sort/id) - retrieves a list of jobs containing keyword in title sorted by ID <br>
-[/jobs/title/{keyword}/sort/title](http://indeed-bot.herokuapp.com/jobs/title/software/sort/title) - retrieves a list of jobs containing keyword in title sorted by title <br>
-[/jobs/title/{keyword}/sort/company](http://indeed-bot.herokuapp.com/jobs/title/software/sort/company) - retrieves a list of jobs containing keyword in title sorted by company <br>
-[/jobs/company/{keyword}](http://indeed-bot.herokuapp.com/jobs/company/reperio) - retrieves a list of jobs containing keyword in company name <br>
-[/jobs/company/{keyword}/sort/id](http://indeed-bot.herokuapp.com/jobs/company/reperio/sort/id) - retrieves a list of jobs containing keyword in company name sorted by ID <br>
-[/jobs/company/{keyword}/sort/title](http://indeed-bot.herokuapp.com/jobs/company/reperio/sort/title) - retrieves a list of jobs containing keyword in company name sorted by title <br>
-[/jobs/company/{keyword}/sort/company](http://indeed-bot.herokuapp.com/jobs/company/reperio/sort/company) - retrieves a list of jobs containing keyword in company name sorted by company <br>
-
+#### What's next?
+Check [indeed-bot-api](https://github.com/AdamWandoch/indeed-bot-api) and find out how to access collected data.
