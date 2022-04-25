@@ -148,19 +148,13 @@ public class IndeedJobService {
 
     public void scanIndeed() {
         // scans indeed and saves retrieved results to database
+        LOG.info("SCANNING INITIALIZED");
         List<IndeedJob> updatedJobs = getUpdatedJobs();
         if (updatedJobs.size() > 0) {
             LOG.info("CACHED JOB LIST WITH " + updatedJobs.size() + " RECORDS");
             indeedJobRepository.saveAll(updatedJobs);
-            // notify the serving api to update its cache
-            notifyAPI();
         } else {
             LOG.info("JOB LIST SIZE == 0, SCANNING UNSUCCESSFUL");
         }
-    }
-
-    private void notifyAPI() {
-        // call indeed-bot-api.herokuapp.com/reload
-        // FIXME: 22/04/2022
     }
 }

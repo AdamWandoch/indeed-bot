@@ -17,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class IndeedBotApplication {
 
     private static final Logger LOG = LoggerFactory.getLogger(IndeedBotApplication.class);
+    private final String PING_ENDPOINT_URL_AWS_API = "https://3hvy3ei8qx.eu-west-1.awsapprunner.com/ping";
 
     @Autowired
     private IndeedJobService indeedJobService;
@@ -31,8 +32,8 @@ public class IndeedBotApplication {
     @Scheduled(initialDelayString = "${initial.update.delay}", fixedDelayString = "${update.delay}")
     void scanIndeed() {
         // scans Indeed.ie
-        LOG.info("SCANNING INITIALIZED");
         indeedJobService.scanIndeed();
+        pingController.notifyAPI(PING_ENDPOINT_URL_AWS_API);
     }
 }
 
