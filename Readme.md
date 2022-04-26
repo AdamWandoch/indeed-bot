@@ -1,9 +1,9 @@
-# IndeedBot
+# IndeedBot Scanner
 ###### Jobs scanner
 
 [![BUILD](https://github.com/AdamWandoch/indeed-bot/workflows/BUILD/badge.svg)](https://github.com/AdamWandoch/indeed-bot/actions/workflows/maven.yml)
 
-VIEW AWS DEPLOYMENTS : [VIRGINIA](https://fkeixfwcg3.us-east-1.awsapprunner.com/) | [OHIO](https://wk3etpctsu.us-east-2.awsapprunner.com/) | [OREGON](https://bkiktqyhhn.us-west-2.awsapprunner.com/#) | [TOKYO](https://mt5z57rhmm.ap-northeast-1.awsapprunner.com/) | [IRELAND](https://ggvb4hen3m.eu-west-1.awsapprunner.com/) |
+VIEW AWS DEPLOYMENTS : [VIRGINIA](https://fkeixfwcg3.us-east-1.awsapprunner.com/) | [OHIO](https://wk3etpctsu.us-east-2.awsapprunner.com/) | [OREGON](https://bkiktqyhhn.us-west-2.awsapprunner.com/) | [TOKYO](https://mt5z57rhmm.ap-northeast-1.awsapprunner.com/) | [IRELAND](https://ggvb4hen3m.eu-west-1.awsapprunner.com/) |
 
 This is an experimental project to explore Java ecosystem of technologies for web development.
 
