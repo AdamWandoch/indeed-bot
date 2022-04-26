@@ -19,17 +19,18 @@ import java.net.URL;
 public class PingController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PingController.class);
+    private final String RELOAD_ENDPOINT_URL_AWS_API = "https://3hvy3ei8qx.eu-west-1.awsapprunner.com/reload";
 
     @GetMapping("/ping")
     public String ping_endpoint() {
         return "PING SUCCESSFUL";
     }
 
-    public void notifyAPI(String url_string) {
-        LOG.info("NOTIFYING API FOR RECORDS RELOAD");
-        LOG.info("PINGING URL : " + url_string);
+    public void notifyAPI() {
+        LOG.info("NOTIFYING API INITIALIZED");
+        LOG.info("PINGING URL : " + RELOAD_ENDPOINT_URL_AWS_API);
         try {
-            URL url = new URL(url_string);
+            URL url = new URL(RELOAD_ENDPOINT_URL_AWS_API);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
             String message = "";
             while (message != null) {
