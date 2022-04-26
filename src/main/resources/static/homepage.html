@@ -59,7 +59,7 @@
         <p>This is an experimental project to explore Java ecosystem of technologies for web development.</p>
         <p>The application retrieves html from <a href="https://ie.indeed.com/jobs?q=software&l=cork&sort=date&filter=0&start=" target="_blank">HERE</a> and parses it creating a list of IndeedJob objects containing information about the job title,
             company name, unique "indeed job id" and a link to view the listing. All data is persisted to Postgres Database hosted on AWS RDS and is available in JSON format through <a href="https://github.com/AdamWandoch/indeed-bot-api" target="_blank"/>indeed-bot-api.</a></p>
-        <p>A number of instances of this bot is deployed in different environments and is scanning Indeed.ie in a staggered pattern to avoid captcha block and to maintain as up-to-date job list in the database as possible.</p>
+        <p>A number of instances of this bot is deployed in different AWS regions(Virginia, Ohio, Oregon, Tokyo, Ireland) and is scanning Indeed.ie in a staggered pattern using cron scheduling to avoid captcha block and to maintain as up-to-date job list in the database as possible.</p>
         <h3>What's next?</h3>
         <p>Checkout <a href="https://github.com/AdamWandoch/indeed-bot#indeedbot-api" target="_blank">README.MD</a> to see how to run this project locally</p>
     </div>
