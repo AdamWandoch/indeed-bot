@@ -18,43 +18,37 @@ import java.net.URL;
 @RestController
 public class PingController {
 
-    private final String PING_ENDPOINT_URL_HEROKU = "https://indeed-bot.herokuapp.com/ping";
-    private final String PING_ENDPOINT_URL_AWS = "https://ru4umr3xja.eu-west-1.awsapprunner.com/ping";
-    private final Logger LOGGER = LoggerFactory.getLogger(IndeedBotApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PingController.class);
+    private final String RELOAD_ENDPOINT_URL_AWS_API = "https://3hvy3ei8qx.eu-west-1.awsapprunner.com/reload";
 
     @GetMapping("/ping")
-    public String ping() {
+    public String ping_endpoint() {
         return "PING SUCCESSFUL";
     }
 
-    void pingAll() {
-        //combines ping operations to multiple instances
-        ping(PING_ENDPOINT_URL_HEROKU);
-        ping(PING_ENDPOINT_URL_AWS);
-    }
-
-    void ping(String url_string) {
-        // prevents free instances from going to sleep by sending a ping request in a regular time interval
-        LOGGER.info("PINGING URL : " + url_string);
+    public void notifyAPI() {
+        LOG.info("NOTIFYING API INITIALIZED");
+        LOG.info("PINGING URL : " + RELOAD_ENDPOINT_URL_AWS_API);
         try {
-            URL url = new URL(url_string);
+            URL url = new URL(RELOAD_ENDPOINT_URL_AWS_API);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
             String message = "";
             while (message != null) {
                 message = inputStream.readLine();
                 if (message != null) {
-                    LOGGER.info("RESPONSE RECEIVED : " + message);
+                    LOG.info("RESPONSE RECEIVED : " + message);
                 }
             }
             inputStream.close();
         }
         catch (MalformedURLException e) {
-            LOGGER.error("MALFORMED URL EXCEPTION : " + e.getMessage());
+            LOG.error("MALFORMED URL EXCEPTION : " + e.getMessage());
             e.printStackTrace();
         }
         catch (IOException e) {
-            LOGGER.error("IOEXCEPTION EXCEPTION : " + e.getMessage());
+            LOG.error("IOEXCEPTION EXCEPTION : " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 }
