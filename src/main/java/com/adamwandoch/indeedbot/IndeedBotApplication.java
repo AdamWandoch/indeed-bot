@@ -28,7 +28,7 @@ public class IndeedBotApplication {
         SpringApplication.run(IndeedBotApplication.class, args);
     }
 
-    @Scheduled(initialDelayString = "${initial.update.delay}", fixedDelayString = "${update.delay}")
+    @Scheduled(cron = "${cron.schedule}")
     void scanIndeed() {
         // rescans Indeed.ie and notifies api to reload records
         indeedJobService.scanIndeed();
