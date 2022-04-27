@@ -20,7 +20,7 @@ import java.net.URL;
 public class PingController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PingController.class);
-    private final String RELOAD_ENDPOINT_URL_AWS_API = "https://3hvy3ei8qx.eu-west-1.awsapprunner.com/reload";
+    private final String RELOAD_ENDPOINT_URL_AWS_API = "http://indeedbotapi-env.eba-6i3bdcsz.eu-west-1.elasticbeanstalk.com/reload";
 
     @Value("${CRON}")
     private String cron;
