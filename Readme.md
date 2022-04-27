@@ -16,10 +16,10 @@ VIEW AWS DEPLOYMENTS: (SOME TEMPORARILY OFFLINE)
 [SEOUL]() |
 [SINGAPORE]() |
 [SYDNEY]() |
-[TOKYO]() |
+[TOKYO](http://indeedbottokyo-env.eba-xmsejbh8.ap-northeast-1.elasticbeanstalk.com/) |
 [CANADA]() |
 [FRANKFURT]() |
-[IRELAND]() |
+[IRELAND](http://indeedbotireland-env.eba-cckhqftf.eu-west-1.elasticbeanstalk.com/) |
 [LONDON]() |
 [MILAN]() |
 [PARIS]() |
