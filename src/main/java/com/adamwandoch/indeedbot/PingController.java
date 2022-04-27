@@ -2,6 +2,7 @@ package com.adamwandoch.indeedbot;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +22,17 @@ public class PingController {
     private static final Logger LOG = LoggerFactory.getLogger(PingController.class);
     private final String RELOAD_ENDPOINT_URL_AWS_API = "https://3hvy3ei8qx.eu-west-1.awsapprunner.com/reload";
 
+    @Value("${CRON}")
+    private String cron;
+
     @GetMapping("/ping")
     public String ping_endpoint() {
         return "PING SUCCESSFUL";
+    }
+
+    @GetMapping("/cron")
+    public String show_cron() {
+        return "CRON value: " + cron;
     }
 
     public void notifyAPI() {
