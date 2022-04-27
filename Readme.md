@@ -3,7 +3,7 @@
 
 [![BUILD](https://github.com/AdamWandoch/indeed-bot/workflows/BUILD/badge.svg)](https://github.com/AdamWandoch/indeed-bot/actions/workflows/maven.yml)
 
-VIEW AWS DEPLOYMENTS: (SOME TEMPORARILY NOT ONLINE)
+VIEW AWS DEPLOYMENTS: (SOME TEMPORARILY OFFLINE)
 
 [VIRGINIA](http://indeedbotvirginia-env.eba-4sf63gic.us-east-1.elasticbeanstalk.com/) | 
 [OHIO](http://indeedbotohio-env.eba-niszmpdp.us-east-2.elasticbeanstalk.com/) | 
@@ -33,7 +33,7 @@ The application retrieves html from [HERE](https://ie.indeed.com/jobs?q=software
             company name, unique "indeed job id" and a link to view the listing. 
 
 All data is persisted to Postgres Database hosted on AWS RDS and is available in JSON format through [indeed-bot-api](https://github.com/AdamWandoch/indeed-bot-api)
-        A number of instances of this bot is deployed in different AWS regions(Virginia, Ohio, Oregon, Tokyo, Ireland) and is scanning Indeed.ie in a staggered pattern using cron scheduling to avoid captcha block and to maintain as up-to-date job list in the database as possible.
+        A number of instances of this bot is deployed in different AWS regions(listed above) and is scanning Indeed.ie in a staggered pattern using cron scheduling to avoid captcha block and to maintain as up-to-date job list in the database as possible.
 
 #### To run the project locally:
  * install PostgreSQL
