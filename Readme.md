@@ -3,12 +3,12 @@
 
 [![BUILD](https://github.com/AdamWandoch/indeed-bot/workflows/BUILD/badge.svg)](https://github.com/AdamWandoch/indeed-bot/actions/workflows/maven.yml)
 
-VIEW AWS DEPLOYMENTS:
+VIEW AWS DEPLOYMENTS: (SOME TEMPORARILY NOT ONLINE)
 
 [VIRGINIA](http://indeedbotvirginia-env.eba-4sf63gic.us-east-1.elasticbeanstalk.com/) | 
 [OHIO](http://indeedbotohio-env.eba-niszmpdp.us-east-2.elasticbeanstalk.com/) | 
-[CALIFORNIA]() |
-[OREGON]() |
+[CALIFORNIA](http://indeedbotcalifornia-env.eba-mhqpsqdy.us-west-1.elasticbeanstalk.com/) |
+[OREGON](http://indeedbotoregon-env.eba-daaqgedz.us-west-2.elasticbeanstalk.com/) |
 [CAPE TOWN]() |
 [HONG KONG]() |
 [MUMBAI]() |
