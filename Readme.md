@@ -1,3 +1,5 @@
+##### :exclamation::exclamation::exclamation: MY AWS ACCOUNT HAS BEEN TEMPORARILY SUSPENDED :exclamation::exclamation::exclamation:
+
 # IndeedBot Scanner
 ###### Jobs scanner
 
