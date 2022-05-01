@@ -1,4 +1,5 @@
 ##### :exclamation::exclamation::exclamation: MY AWS ACCOUNT HAS BEEN TEMPORARILY SUSPENDED :exclamation::exclamation::exclamation:
+##### :exclamation::exclamation::exclamation: RUN THE PROJECT LOCALLY OR CONTACT ME FOR INFO :exclamation::exclamation::exclamation:
 
 # IndeedBot Scanner
 ###### Jobs scanner
