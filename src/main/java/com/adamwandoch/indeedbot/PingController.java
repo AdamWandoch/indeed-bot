@@ -20,7 +20,7 @@ import java.net.URL;
 public class PingController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PingController.class);
-    private final String RELOAD_ENDPOINT_URL_AWS_API = "http://indeedbotapi-env.eba-6i3bdcsz.eu-west-1.elasticbeanstalk.com/reload";
+    private final String RELOAD_ENDPOINT_URL_HEROKU_API = "http://indeed-bot-api.herokuapp.com/reload";
 
     @Value("${CRON}")
     private String cron;
@@ -37,9 +37,9 @@ public class PingController {
 
     public void notifyAPI() {
         LOG.info("NOTIFYING API INITIALIZED");
-        LOG.info("PINGING URL : " + RELOAD_ENDPOINT_URL_AWS_API);
+        LOG.info("PINGING URL : " + RELOAD_ENDPOINT_URL_HEROKU_API);
         try {
-            URL url = new URL(RELOAD_ENDPOINT_URL_AWS_API);
+            URL url = new URL(RELOAD_ENDPOINT_URL_HEROKU_API);
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(url.openStream()));
             String message = "";
             while (message != null) {
