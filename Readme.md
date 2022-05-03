@@ -1,5 +1,5 @@
 ##### :exclamation::exclamation::exclamation: MY AWS ACCOUNT HAS BEEN SUSPENDED :exclamation::exclamation::exclamation:
-##### :exclamation::exclamation::exclamation: RUN THE PROJECT LOCALLY OR CONTACT ME FOR INFO :exclamation::exclamation::exclamation:
+##### :exclamation::exclamation::exclamation: RUN THE PROJECT LOCALLY, CHECK HEROKU_MASTER BRANCH OR CONTACT ME FOR INFO :exclamation::exclamation::exclamation:
 
 # IndeedBot Scanner
 ###### Jobs scanner
