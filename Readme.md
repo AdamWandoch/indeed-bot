@@ -5,7 +5,7 @@
 
 SINGLE BOT DEPLOYED ON HEROKU AFTER MY AWS ACCOUNT HAS BEEN SUSPENDED
 
-[HEROKU]("http://indeed-bot.herokuapp.com/") | 
+VIEW DEPLOYMENT : [HEROKU](http://indeed-bot.herokuapp.com/) 
 
 This is an experimental project to explore Java ecosystem of technologies for web development.
 
